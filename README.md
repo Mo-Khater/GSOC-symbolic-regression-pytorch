@@ -1,7 +1,7 @@
 to understand the code 
 start from the EquationSearch.py file and go on for each function
 
-## File Descriptions
+# File Descriptions
 
 ## Candidate.py
 Defines the Candidate class, representing a single symbolic expression (tree) in the population, including its loss, cost, complexity, and birth time.
