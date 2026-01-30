@@ -1,45 +1,45 @@
 to understand the code 
 start from the EquationSearch.py file and go on for each function
 
-# File Descriptions
+## File Descriptions
 
-# Candidate.py
+## Candidate.py
 Defines the Candidate class, representing a single symbolic expression (tree) in the population, including its loss, cost, complexity, and birth time.
 
-# CheckConstrains.py
+## CheckConstrains.py
 Handles validation and constraint checking for generated trees (e.g., maximum depth, allowed operators, and structural validity).
 
-# Complexity.py
+## Complexity.py
 Computes expression complexity metrics used for parsimony pressure to penalize overly complex equations.
 
-# Dataset.py
+## Dataset.py
 Provides dataset description.
 
-# EquationSearch.py
+## EquationSearch.py
 Main search controller. Orchestrates the symbolic regression process including initialization, evolutionary cycles, evaluation, and selection.
 
-# Generation.py
+## Generation.py
 Responsible for generating initial random expression trees and producing new individuals during evolution.
 
-# Mutation.py
+## Mutation.py
 Implements mutation operators applied to trees (structural mutations, constant perturbations, operator substitutions, etc.).
 
-# Options.py
+## Options.py
 Central configuration module containing hyperparameters and settings such as population size, operator sets, mutation rates, and annealing parameters.
 
-# Population.py
+## Population.py
 Manages the population of candidates: storage, ranking, selection, replacement, and population-level operations.
 
-# RegEvolCycle.py
+## RegEvolCycle.py
 Implements the regularized evolutionary cycle (evolve–simplify–optimize loop), coordinating mutation, crossover, evaluation, and survivor selection.
 
-# RepositoryOfOperations.py
+## RepositoryOfOperations.py
 Defines the available unary and binary operators (e.g., +, *, sin, cos) along with their PyTorch implementations.
 
-# Tree.py
+## Tree.py
 Defines the expression tree data structure, including nodes, traversal utilities, evaluation logic, and conversion to symbolic equations.
 
-# Utils.py
+## Utils.py
 Collection of helper utilities (tree helpers, simplification routines, logging, formatting, etc.).
 
 # example.py
