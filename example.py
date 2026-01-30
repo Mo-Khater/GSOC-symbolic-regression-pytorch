@@ -23,7 +23,7 @@ def main() -> None:
     y = true_y + noise
     true_loss = ((true_y - y) ** 2).mean().item()
     print("True function loss (MSE vs noisy y):", true_loss)
-    state = equation_search(X, y, niterations=50, nout=1)
+    state = equation_search(X, y, niterations=3, nout=1)
 
     best_overall = min(state.hof[0].values(), key=lambda c: c.cost)
     print("Best evolved candidate loss:", best_overall.loss)

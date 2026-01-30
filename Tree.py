@@ -132,6 +132,7 @@ class Tree:
             for idx, ch in enumerate(node.children, start=0):
                 if ch is target:
                     return node, idx
+        return None, None
 
     def forward(self, X):
         op = self.op
@@ -154,6 +155,12 @@ class Tree:
         if spec is not None:
             args = [child.forward(X) for child in self.children]
             return spec.fn(*args)
+
+    def rotate_randomly(self, rng=None):
+        return rotate_randomly(self, rng=rng)
+
+    def randomize(self, curmaxsize, options, nfeatures, rng=None):
+        return randomize(self, curmaxsize, options, nfeatures, rng=rng)
 
 
     def clone(self):

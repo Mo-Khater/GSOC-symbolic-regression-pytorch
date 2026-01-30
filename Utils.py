@@ -1,5 +1,6 @@
 import math
-from Candidate import Tree, Candidate, calculate_complexity, calculate_loss_and_cost
+from Candidate import Candidate, calculate_complexity, calculate_loss_and_cost
+from Tree import Tree
 from ReposityOfOperations import OP_REGISTRY
 import torch
 

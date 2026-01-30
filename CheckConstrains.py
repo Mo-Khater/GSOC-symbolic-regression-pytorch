@@ -1,4 +1,5 @@
-from Candidate import calculate_complexity, Tree
+from Complexity import calculate_complexity
+from Tree import Tree
 from Options import Options
 from typing import Dict, Set
 def calculate_depth(tree: Tree) -> int:

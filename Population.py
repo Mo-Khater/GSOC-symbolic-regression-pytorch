@@ -1,5 +1,6 @@
 import random
-from Candidate import Tree, Candidate
+from Candidate import Candidate
+from Tree import Tree
 
 def generate_random_tree(max_depth,options, p_const=0.2):
     if max_depth <= 0:
