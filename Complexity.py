@@ -14,6 +14,15 @@ def calculate_complexity(tree, seen=None):
     return total
 
 
+def normalization(dataset) -> float:
+    baseline = getattr(dataset, "baseline_loss", None)
+    use_baseline = bool(getattr(dataset, "use_baseline", False))
+    if baseline is None or not math.isfinite(float(baseline)):
+        use_baseline = False
+    if use_baseline and float(baseline) >= 0.01:
+        return float(baseline)
+    return 0.01
+
 def calculate_loss_and_cost(complexity,dataset,tree,parsimony_penalty):
     X = dataset.X
     y = dataset.y
@@ -31,7 +40,8 @@ def calculate_loss_and_cost(complexity,dataset,tree,parsimony_penalty):
         loss_t = (err2 * w).sum() / (w.sum() + 1e-12)
 
     loss = float(loss_t.detach().cpu().item())
-    cost = float(loss + parsimony_penalty * complexity)
+    norm = normalization(dataset)
+    cost = float((loss / norm) + parsimony_penalty * complexity)
     if math.isnan(loss) or math.isinf(loss):
         return float("inf"), float("inf")
     return loss, cost

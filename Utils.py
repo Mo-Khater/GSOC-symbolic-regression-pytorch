@@ -3,6 +3,7 @@ from Candidate import Candidate, calculate_complexity, calculate_loss_and_cost
 from Tree import Tree
 from ReposityOfOperations import OP_REGISTRY
 import torch
+import time
 
 
 def is_const_leaf(tree):
@@ -273,3 +274,38 @@ def get_cur_maxsize(options, total_cycles, cycles_remaining):
         return 3 + int((options.maxsize - 3) * fraction_elapsed / warmup)
     else:
         return options.maxsize
+
+
+
+def poisson_sample(lam, rng=None):
+    if lam <= 0.0:
+        return 0
+    rng = rng or __import__("random")
+    L = math.exp(-lam)
+    k = 0
+    p = 1.0
+    while p > L:
+        k += 1
+        p *= rng.random()
+    return k - 1
+
+
+
+def migrate_candidates(candidates,population_members,frac,rng=None):
+    if not candidates or not population_members or frac <= 0.0:
+        return
+
+    rng = rng or __import__("random")
+    pop_size = len(population_members)
+    mean_replace = pop_size * frac
+    num_replace = poisson_sample(mean_replace, rng=rng)
+    num_replace = min(num_replace, len(candidates), pop_size)
+    if num_replace <= 0:
+        return
+
+    locations = [rng.randrange(pop_size) for _ in range(num_replace)]
+    migrants = [rng.choice(candidates) for _ in range(num_replace)]
+    for idx, cand in zip(locations, migrants):
+        copied = cand.deep_copy()
+        copied.birth = int(time.time_ns())
+        population_members[idx] = copied
